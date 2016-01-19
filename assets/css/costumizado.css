@@ -1,17 +1,8 @@
-body {
-    padding-top: 70px;
-}
-
-.starter-template{
-    padding: 40px 15px;
-    text-align: center;
-}
-
-input#email{
+input#email {
     text-transform: lowercase;
 }
 
-label.error{
+label.error {
     color: red;
 }
 
@@ -19,6 +10,7 @@ label.error{
     content: '*';color: red;
 }
 
-.pagination {
-    margin: 0px;
+.msg-req {
+    color: red;
+    font-weight: bold;
 }
