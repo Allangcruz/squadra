@@ -76,7 +76,9 @@ class SistemaDAO extends CI_Model {
                            sigla, 
                            email, 
                            url, 
-                           IF(status = 0,'Ativo', 'Cancelado') status");
+                           status,
+                           date_format(updated_at,'%d/%m/%Y - %H:%i:%s') updated_at,
+                           justificativa ultima_justificativa");
         $this->db->where('id', $id);
         $this->db->limit(1); 
 

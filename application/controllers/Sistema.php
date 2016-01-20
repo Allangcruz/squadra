@@ -41,9 +41,19 @@ class Sistema extends CI_Controller {
             'email' => $this->input->post('email'),
             'sigla' => $this->input->post('sigla'),
             'url' => $this->input->post('url'),
-            'created_at' => date("Y-m-d H:i:s")
+            'updated_at' => date("Y-m-d H:i:s")  
         ];
-                        
+        
+        if($this->input->post('id') != '')
+        {
+            $sistema['status'] = $this->input->post('status'); 
+            
+            if($this->input->post('justificativa') != '')
+            {
+                $sistema['justificativa'] = $this->input->post('justificativa');
+            }
+        }
+              
         return $sistema;
     }
     

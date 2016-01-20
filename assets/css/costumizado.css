@@ -14,3 +14,7 @@ label.error {
     color: red;
     font-weight: bold;
 }
+
+textarea {
+    height: auto !important;
+}

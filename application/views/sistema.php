@@ -50,9 +50,10 @@
         <li>Cadastro</li>
       </ol>
       <br>
-
-      <div id="resposta"></div>
-
+        
+     <div id="resposta"></div>
+     
+     <div>  
       <?php echo form_open('sistema', array('id' => 'form_sistema', 'class' => 'ls-form','data-ls-module'=>'form'));?>
         <input type="hidden" id="id" name="id">
         
@@ -61,7 +62,7 @@
                 <legend class="ls-title-5">Dados do sistema</legend>
             </div>
             
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <p class="msg-req">* Campos Obrigatório</p>
             </div>
         </div>
@@ -133,14 +134,14 @@
             <div class="row">
                 <label class="ls-label col-md-6 col-xs-12">
                   <span class="ls-label-text">Justificativa da última alteração: </span>
-                  <textarea id="ultima_justificativa" name="ultima_justificativa" rows="15" class="ls-textarea-autoresize"></textarea>
+                  <textarea id="ultima_justificativa" rows="7" disabled="disabled"  maxlength="500"></textarea>
                 </label>
             </div>            
             
             <div class="row">
                 <label class="ls-label col-md-6 col-xs-12">
                   <span class="ls-label-text">Nova justificativa de alteração</span>
-                  <textarea id="justificativa" name="justificativa" rows="15" class="ls-textarea-autoresize"></textarea>
+                  <textarea id="justificativa" name="justificativa" rows="7" maxlength="500"></textarea>
                 </label>
             </div>
         </div>
@@ -157,6 +158,7 @@
         </div>
         <br><br>
       <?php echo form_close(); ?>
+    </div>          
     </div>
 </main>
 
