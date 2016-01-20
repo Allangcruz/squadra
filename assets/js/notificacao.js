@@ -1,26 +1,26 @@
 function removerNotificacao(seletor) {
     $(seletor).html('');
-    $(seletor).removeClass('alert alert-success');
-    $(seletor).removeClass('alert alert-warning');
-    $(seletor).removeClass('alert alert-danger');
+    $(seletor).removeClass('ls-alert-success ls-sm-space');
+    $(seletor).removeClass('ls-alert-danger ls-sm-space');
+    $(seletor).removeClass('ls-alert-warning ls-sm-space');
 }
 
 function notificacao(msg, seletor) {
     removerNotificacao(seletor);
 
-    $(seletor).html('<button onclick="removerNotificacao(\'' + seletor + '\')" class="close"><span>×</span></button>'+msg.texto);
+    $(seletor).html('<span onclick="removerNotificacao(\'' + seletor + '\')" data-ls-module="dismiss" class="ls-dismiss"><b style="color:#000;">&times;</b></span>'+msg.texto);
 
     switch(msg.tipo){
         case "a":
-            $(seletor).addClass('alert  alert-warning');
+            $(seletor).addClass('ls-alert-warning ls-sm-space');
         break;
      
         case "e":
-            $(seletor).addClass('alert  alert-danger');
+            $(seletor).addClass('ls-alert-danger ls-sm-space');
         break;
      
         case "s":
-            $(seletor).addClass('alert  alert-success');
+            $(seletor).addClass('ls-alert-success ls-sm-space');
         break;
     }
 

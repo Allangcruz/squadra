@@ -22,8 +22,8 @@
           </label>
           
           <div class="col-md-2 ls-actions-btn">
-            <a href="javascript:consultar('#form_sistema_consulta', 'consultar', 'html', function() {loading('#load_consulta', 1);}, retornoConsulta);" class="ls-btn ls-btn-sm" title="Pesquisar">Pesquisar</a>
-            <a href="javascript:;" title="Limpar" class="ls-btn ls-btn-sm">Limpar</a>
+            <a href="javascript:consultar('#form_sistema_consulta', 'pesquisar', 'html', function() {loading('#load_consulta', 1); }, retornoConsulta);" class="ls-btn ls-btn-sm" title="Pesquisar">Pesquisar</a>
+            <a href="javascript:limpar();" title="Limpar" class="ls-btn ls-btn-sm">Limpar</a>
             <a href="javascript:;" title="Novo Sistema" class="ls-btn-sm ls-btn-primary novo-cadastro">Novo Sistema</a>
             &nbsp;<span id="load_consulta"></span>
           </div>  
@@ -46,7 +46,7 @@
 
       <!-- Auxilia na navegação -->
       <ol class="ls-breadcrumb ls-no-margin-bottom">
-        <li><a href="#" class="bc-voltar">Todos os sistemas</a></li>
+        <li><a href="javascript:showViewGrid();">Todos os sistemas</a></li>
         <li>Cadastro</li>
       </ol>
       <br>

@@ -74,4 +74,6 @@ function retornoConsulta(ret) {
     $('#resposta_consulta').html(ret);
     loading('#load_consulta', 0);
     loading('.load_consulta', 0);
+    $('.ac-align-right').parent().addClass('ls-txt-right');
+    $('.ac-align-center').parent().addClass('ls-txt-center');
 }

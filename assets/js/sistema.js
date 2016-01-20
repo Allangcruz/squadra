@@ -24,30 +24,39 @@ $(document).ready(function() {
     $('.novo-cadastro').click(function(){
         showViewForm();
         $('#id').val('');
+        validacao.resetForm();
         refreshForm('#form_sistema');
     });
 
     //realiza a operação de salvar
     $('.salvar-sistema').click(function(){
-        if($("#form_sistema").valid()){
+        var desabilitado = $(this).attr('disabled');
+        
+        if(desabilitado == undefined){
+        
+            if($("#form_sistema").valid()){
 
-            if($('#id').val() == '') {
-                salvar_alterar('#form_sistema', 'create', 'json',antesEnviar('#resposta','#load'),retornoSalvar);
+                if($('#id').val() == '') {
+                    salvar_alterar('#form_sistema', 'incluir', 'json', antesEnviar('#resposta','#load'), retornoSalvar);
+                } else {
+                     salvar_alterar('#form_sistema', 'alterar', 'json', antesEnviar('#resposta','#load'), retornoAlterar);
+                }
+
             } else {
-                 salvar_alterar('#form_sistema', 'update', 'json',antesEnviar('#resposta','#load'),retornoAlterar);
+                validacao.focusInvalid();
             }
             
-        } else {
-            validacao.focusInvalid();
         }
     });
 
+    consultar('#form_sistema_consulta', 'pesquisar', 'html', function() {loading('#load_consulta', 1); }, retornoConsulta);
+    
     $('#expressao').keyup(function() {
-        //consultar('#form_sistema_consultar', 'read', 'html', function() {loading('#load_consulta', 1); }, retornoConsulta);
+        consultar('#form_sistema_consulta', 'pesquisar', 'html', function() {loading('#load_consulta', 1); }, retornoConsulta);
     });    
 
     $('#filtro').change(function() {
-        //consultar('#form_sistema_consultar', 'read', 'html', function() {loading('#load_consulta', 1); }, retornoConsulta);
+        consultar('#form_sistema_consulta', 'pesquisar', 'html', function() {loading('#load_consulta', 1); }, retornoConsulta);
     });
 });
 
@@ -59,11 +68,12 @@ $(document).ready(function() {
  | Função que retorna resultado da função 'salvar'
  |
  */
-function retornoSalvar(json, erro) {
+function retornoSalvar(json, erro) 
+{
     notificacao(json.msg, '#resposta');
 
     if(json.msg.tipo == "s"){
-        consultar('#form_sistema_consultar', 'read', 'html', function() {loading('#load_consulta', 1); }, retornoConsulta);
+        consultar('#form_sistema_consulta', 'pesquisar', 'html', function() {loading('#load_consulta', 1); }, retornoConsulta);
         refreshForm('#form_sistema');
         $('input[type=tel]').val('');
     }
@@ -82,11 +92,12 @@ function retornoSalvar(json, erro) {
  | Função que retorna resultado da função 'alterar'
  |
  */
-function retornoAlterar(json, erro) {
+function retornoAlterar(json, erro) 
+{
     notificacao(json.msg, '#resposta');
 
     if(json.msg.tipo == "s") {
-        consultar('#form_sistema_consultar', 'read', 'html', function() {loading('#load_consulta', 1); }, retornoConsulta);
+        consultar('#form_sistema_consulta', 'pesquisar', 'html', function() {loading('#load_consulta', 1); }, retornoConsulta);
     }
     
     loading('#load', 0);
@@ -101,11 +112,12 @@ function retornoAlterar(json, erro) {
  | -------------------------------------------------------------------
  | Funções "retornoPesquisar"
  | -------------------------------------------------------------------
- | Função que retorna resultado da função 'readById', alem de preencher
+ | Função que retorna resultado da função 'pesquisarById', alem de preencher
  | os dados no formulario
  |
  */
-function retornoPesquisar(json, erro) {
+function retornoPesquisar(json, erro) 
+{
     removerNotificacao('#resposta');
     $('#id').val(json.id);
     $('#nome').val(json.nome);
@@ -132,4 +144,11 @@ function showViewForm()
     $('.view-detail').addClass('ls-display-none');
     
     removerNotificacao('#resposta');
+}
+
+//limpa a consulta
+function limpar()
+{
+    refreshForm('#form_sistema_consulta');
+    consultar('#form_sistema_consulta', 'pesquisar', 'html', function() {loading('#load_consulta', 1); }, retornoConsulta);
 }

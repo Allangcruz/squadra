@@ -31,12 +31,13 @@ function enviarPorUri(url, datatype, antesEnviar, retorno)
 }
 
 
-function mostraErro(xhr, ajaxOptions, thrownError) 
-{ 
-    $("div.msg-error").html(xhr.responseText);
-    $('div#modal-error').modal('show');
+function mostraErro(xhr, ajaxOptions, thrownError) { 
+    $("div#ac-error").html(xhr.responseText);
+    locastyle.modal.open("#modal-error");
+
     loading('#load', 0);
 }
+
 
 function loading(seletor, status) 
 {

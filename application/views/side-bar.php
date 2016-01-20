@@ -3,7 +3,7 @@
     <div class="ls-sidebar-inner">
         <nav class="ls-menu">
             <ul>
-                <li><a href="<?php echo base_url();?>" title="Sistemas" class="ls-ico-home">Sistemas</a></li>
+                <li><a href="<?php echo base_url();?>" title="Sistemas" class="ls-ico-cog">Sistemas</a></li>
             </ul>
         </nav>
     </div>
