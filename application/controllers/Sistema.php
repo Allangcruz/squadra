@@ -111,7 +111,7 @@ class Sistema extends CI_Controller {
             $resultado = $this->SistemaDAO->listAll($filtro, $descricao, $limite, $offset);
 
             if ($resultado == null) {
-                echo '<b>Nenhum registro encontrado<b/>';
+                echo '<b>'.Mensagem::MN001().'<b/>';
             } else {
                 $this->table->set_template(array('table_open'=>'<table class="ls-table ls-table-bordered ls-sm-space ls-bg-header">'));
                 $this->table->set_empty('');//Se a tabela estiver vazia
