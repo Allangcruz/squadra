@@ -46,7 +46,7 @@
 
       <!-- Auxilia na navegação -->
       <ol class="ls-breadcrumb ls-no-margin-bottom">
-        <li><a href="javascript:showViewGrid();">Todos os sistemas</a></li>
+        <li><a href="javascript:showViewGrid();$('#id').val('');">Todos os sistemas</a></li>
         <li>Cadastro</li>
       </ol>
       <br>
@@ -93,13 +93,66 @@
               <input type="text" id="url" name="url" maxlength="50">
             </label>
         </div>
+        
+        
+        <!-- Controle do sistema -->
+        <div class="view-controle-sistema">
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <legend class="ls-title-5">Dados do sistema</legend>
+                </div>        
+            </div>        
+        
+            <div class="row">
+                <label class="ls-label col-md-3 col-xs-12">
+                  <span class="ls-label-text req">Status:</span>
+                   <div class="ls-custom-select">
+                      <select class="ls-select" id="status" name="status">
+                        <option value="0">Ativo</option>  
+                        <option value="1">Cancelado</option>  
+                      </select>
+                    </div>
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="ls-label col-md-6 col-xs-12">
+                  <span class="ls-label-text">Usuário responsavel pela ultima alteração:</span>
+                  <input type="text" value="Allan Gonçalves da Cruz" disabled="disabled">
+                </label>
+            </div>        
+
+            <div class="row">
+                <label class="ls-label col-md-6 col-xs-12">
+                  <span class="ls-label-text">Data da ultima alteração</span>
+                  <input type="text" id="updated_at" disabled="disabled">
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="ls-label col-md-6 col-xs-12">
+                  <span class="ls-label-text">Justificativa da última alteração: </span>
+                  <textarea id="ultima_justificativa" name="ultima_justificativa" rows="15" class="ls-textarea-autoresize"></textarea>
+                </label>
+            </div>            
+            
+            <div class="row">
+                <label class="ls-label col-md-6 col-xs-12">
+                  <span class="ls-label-text">Nova justificativa de alteração</span>
+                  <textarea id="justificativa" name="justificativa" rows="15" class="ls-textarea-autoresize"></textarea>
+                </label>
+            </div>
+        </div>
+        <!-- Fim Controle do sistema -->
+        
 
         <div class="row">
           <div class="col-md-12">
           <hr>
             <span id="load"></span>
             <a href="javascript:;" class="ls-btn-primary ac-btn-disable salvar-sistema">Salvar</a>
-            <a href="javascript:showViewGrid();" class="ls-btn">Voltar</a>
+            <a href="javascript:showViewGrid();$('#id').val('');" class="ls-btn">Voltar</a>
           </div>
         </div>
         <br><br>

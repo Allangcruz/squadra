@@ -142,6 +142,12 @@ function showViewForm()
     $('.view-grid').addClass('ls-display-none');
     $('.view-detail').addClass('ls-display-none');
     
+    if($('#id').val() == ''){
+        $('.view-controle-sistema').addClass('ls-display-none');
+    } else {
+        $('.view-controle-sistema').removeClass('ls-display-none');
+    }
+    
     removerNotificacao('#resposta');
 }
 

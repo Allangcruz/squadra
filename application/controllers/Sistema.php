@@ -41,6 +41,7 @@ class Sistema extends CI_Controller {
             'email' => $this->input->post('email'),
             'sigla' => $this->input->post('sigla'),
             'url' => $this->input->post('url'),
+            'created_at' => date("Y-m-d H:i:s")
         ];
                         
         return $sistema;
