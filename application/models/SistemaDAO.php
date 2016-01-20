@@ -67,6 +67,21 @@ class SistemaDAO extends CI_Model {
             return $this->db->get($this->tabela)->result();
         }    
     }
+    
+    //retorna apenas um registro para edicao
+    public function pesquisarPorId($id)
+    {
+        $this->db->select("id, 
+                           descricao, 
+                           sigla, 
+                           email, 
+                           url, 
+                           IF(status = 0,'Ativo', 'Cancelado') status");
+        $this->db->where('id', $id);
+        $this->db->limit(1); 
+
+        return $this->db->get($this->tabela)->row();     
+    }    
 
 
 }

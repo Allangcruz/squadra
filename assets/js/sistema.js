@@ -116,15 +116,14 @@ function retornoAlterar(json, erro)
  | os dados no formulario
  |
  */
-function retornoPesquisar(json, erro) 
+function retornoPesquisarPorId(json, erro) 
 {
     removerNotificacao('#resposta');
-    $('#id').val(json.id);
-    $('#nome').val(json.nome);
-    $('#email').val(json.email);
-    $('#telefone').val(json.telefone);
-    $('#celular').val(json.telefone);
-
+    
+    for(var index in json) {
+        $('#'+index).val(json[index]);
+    }
+    
     showViewForm();
 }  
 

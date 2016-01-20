@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 date_default_timezone_set('America/Sao_Paulo');
 
 class Sistema extends CI_Controller {
-    private $tabela = 'pessoa';
+    private $tabela = 'sistema';
 
     function __construct() 
     {
@@ -65,7 +65,7 @@ class Sistema extends CI_Controller {
                 $sistema = $this->getDados();
                 
                 //grava o sistema
-                if(!$this->Crud->create('sistema', $sistema, false)) {
+                if(!$this->Crud->create($this->tabela, $sistema, false)) {
                   $data['msg'] = array('tipo' => 'e', 'texto' => 'Erro ao incluir o sistema');
                 }else {
                   $data['msg'] = array('tipo' => 's', 'texto' => Mensagem::MN002());
@@ -114,7 +114,7 @@ class Sistema extends CI_Controller {
                         '<span class="ac-align-center">'.$value->sigla.'</span>',
                         '<span class="ac-align-center">'.$value->email.'</span>',
                         '<span class="ac-align-center">'.$value->status.'</span>',
-                        '<a class="ac-align-right ac-btn-right ls-btn ls-btn-xs" href="javascript:pesquisar(\'#form_usuario_consulta\',\'pesquisar/'.$value->id.'\',\'json\', function(){}, retornoPesquisar);" title="Alterar" ><i class="ls-ico-pencil"></i></a>'
+                        '<a class="ac-align-right ac-btn-right ls-btn ls-btn-xs" href="javascript:pesquisar(\'#form_sistema_consulta\',\'pesquisarPorId/'.$value->id.'\',\'json\', function(){}, retornoPesquisarPorId);" title="Alterar" ><i class="ls-ico-pencil"></i></a>'
                   );           
                 }
           
@@ -134,7 +134,7 @@ class Sistema extends CI_Controller {
 
         try {
 
-            $pessoa = $this->PessoaDAO->readById($id);
+            $pessoa = $this->SistemaDAO->pesquisarPorId($id);
 
             if(!$pessoa){
                 $data['msg'] = array('tipo' => 'e', 'texto' => 'O registro com codigo <b>'.$id.'</b> não existe!');
@@ -164,21 +164,15 @@ class Sistema extends CI_Controller {
             } else {
                 
                 //pega todos os dados necessarios da view
-                $pessoa = $this->getDados();
+                $sistema = $this->getDados();
                 
-                //Condição para verificar se os dados foram gravados com exito
-                if($this->Crud->update($this->tabela, $pessoa['pessoa'])) {
-                    
-                    //grava o endereco
-                    if(!$this->Crud->update('endereco', $pessoa['endereco'])) {
-                      $data['msg'] = array('tipo' => 'e', 'texto' => 'Erro->pessoa->salvar->endereco: Erro ao salvar o endereco da pessoa');
-                    }else {
-                      $data['msg'] = array('tipo' => 's', 'texto' => 'Registro <b>alterado</b> com sucesso.');
-                    }
-
-                } else {
-                    $data['msg'] = array('tipo' => 'e', 'texto' => 'Erro->pessoa->salvar: Por favor contate o Administrador: Allan, allangcruz@gmail.com');
+                //grava o endereco
+                if(!$this->Crud->update($this->tabela, $sistema)) {
+                  $data['msg'] = array('tipo' => 'e', 'texto' => 'Erro ao alterar sistema');
+                }else {
+                  $data['msg'] = array('tipo' => 's', 'texto' => Mensagem::MN002());
                 }
+
             }
             
         } catch (Exception $exc) {
