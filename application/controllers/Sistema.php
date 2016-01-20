@@ -113,7 +113,7 @@ class Sistema extends CI_Controller {
                         $value->descricao,
                         '<span class="ac-align-center">'.$value->sigla.'</span>',
                         '<span class="ac-align-center">'.$value->email.'</span>',
-                        '<span class="ac-align-center"></span>',
+                        '<span class="ac-align-center">'.$value->status.'</span>',
                         '<a class="ac-align-right ac-btn-right ls-btn ls-btn-xs" href="javascript:pesquisar(\'#form_usuario_consulta\',\'pesquisar/'.$value->id.'\',\'json\', function(){}, retornoPesquisar);" title="Alterar" ><i class="ls-ico-pencil"></i></a>'
                   );           
                 }

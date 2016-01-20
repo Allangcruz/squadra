@@ -37,7 +37,7 @@ class SistemaDAO extends CI_Model {
     //retorna todos os dados necessarios
     public function listAll($filtro, $descricao, $limite, $apartir) 
     {
-        $this->db->select("id, descricao, sigla, email");
+        $this->db->select("id, descricao, sigla, email, IF(status = 0,'Ativo', 'Cancelado') status");
         $this->db->order_by('id desc');
 
         switch($filtro)
