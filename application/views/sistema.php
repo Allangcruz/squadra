@@ -156,7 +156,7 @@
             <a href="javascript:showViewGrid();$('#id').val('');" class="ls-btn">Voltar</a>
           </div>
         </div>
-        <br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
       <?php echo form_close(); ?>
     </div>          
     </div>
