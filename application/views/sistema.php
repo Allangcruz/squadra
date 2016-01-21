@@ -165,6 +165,4 @@
 <script src="<?php echo base_url()?>assets/js/principal.js"></script>
 <script src="<?php echo base_url()?>assets/js/crud.js"></script>
 <script src="<?php echo base_url()?>assets/js/notificacao.js"></script>
-<script src="<?php echo base_url()?>assets/jquery-validation/jquery.validate.min.js"></script>
-<script src="<?php echo base_url()?>assets/jquery-validation/messages_pt_BR.min.js"></script>
 <script src="<?php echo base_url()?>assets/js/sistema.js"></script>

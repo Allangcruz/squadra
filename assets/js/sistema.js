@@ -8,23 +8,10 @@
 
 $(document).ready(function() {
 
-    //regras de validacao do formulario
-    var validacao = $('#form_sistema').validate({
-      rules: {
-        descricao: { required: true},
-        sigla: { required: true},
-      },
-      messages: {
-        descricao: { required: 'Preencha o campo Descrição' },
-        sigla: { required: 'Preencha o campo Sigla' },
-      }
-    });
-    
     //exibi a funcionalidade de adicionar
     $('.novo-cadastro').click(function(){
         showViewForm();
         $('#id').val('');
-        validacao.resetForm();
         refreshForm('#form_sistema');
     });
 
@@ -34,16 +21,10 @@ $(document).ready(function() {
         
         if(desabilitado == undefined){
         
-            if($("#form_sistema").valid()){
-
-                if($('#id').val() == '') {
-                    salvar_alterar('#form_sistema', 'incluir', 'json', antesEnviar('#resposta','#load'), retornoSalvar);
-                } else {
-                     salvar_alterar('#form_sistema', 'alterar', 'json', antesEnviar('#resposta','#load'), retornoAlterar);
-                }
-
+            if($('#id').val() == '') {
+                salvar_alterar('#form_sistema', 'incluir', 'json', antesEnviar('#resposta','#load'), retornoSalvar);
             } else {
-                validacao.focusInvalid();
+                 salvar_alterar('#form_sistema', 'alterar', 'json', antesEnviar('#resposta','#load'), retornoAlterar);
             }
             
         }
@@ -61,13 +42,7 @@ $(document).ready(function() {
 });
 
 
-/*
- | -------------------------------------------------------------------
- | Funções "retornoSalvar"
- | -------------------------------------------------------------------
- | Função que retorna resultado da função 'salvar'
- |
- */
+//callback do funcao salvar
 function retornoSalvar(json, erro) 
 {
     notificacao(json.msg, '#resposta');
@@ -85,13 +60,8 @@ function retornoSalvar(json, erro)
     }, 1000);
 }
 
- /*
- | -------------------------------------------------------------------
- | Funções "retornoAlterar"
- | -------------------------------------------------------------------
- | Função que retorna resultado da função 'alterar'
- |
- */
+
+//callback da funcao alterar
 function retornoAlterar(json, erro) 
 {
     notificacao(json.msg, '#resposta');
@@ -108,14 +78,7 @@ function retornoAlterar(json, erro)
 }
 
 
- /*
- | -------------------------------------------------------------------
- | Funções "retornoPesquisar"
- | -------------------------------------------------------------------
- | Função que retorna resultado da função 'pesquisarById', alem de preencher
- | os dados no formulario
- |
- */
+//callback da funcao pesquisarPorId
 function retornoPesquisarPorId(json, erro) 
 {
     removerNotificacao('#resposta');

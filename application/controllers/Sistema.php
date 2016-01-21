@@ -22,13 +22,28 @@ class Sistema extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+    //validacao de campos obrigatorios
+    public function validarObrigatorio()
+    {
+        $descricao = $this->input->post('descricao');
+        $sigla = $this->input->post('sigla');
+        $status;
+        
+        if($descricao == '' || $sigla == '')
+        {
+            $status = false;
+            
+        } else {
+           $status = true;    
+        }
+        
+        return $status;
+    }
+    
     //Seta as regras de validações dos campos
     public function setRegrasValidacao()
     {
-        $this->form_validation->set_rules('descricao', '<b>Descrição</b>', 'trim|required');
-        $this->form_validation->set_rules('sigla', '<b>Sigla</b>', 'trim|required');
-        $this->form_validation->set_rules('email', '<b></b>', 'trim|valid_email');
-
+        $this->form_validation->set_rules('email', '<b></b>', 'trim|valid_email',['valid_email' => Mensagem::MN004()]);
         $this->form_validation->set_error_delimiters('<span>', '</span>');        
     }         
     
@@ -63,26 +78,33 @@ class Sistema extends CI_Controller {
         try {
             
             $data = array();
-
-             //Seta as validações
-             $this->setRegrasValidacao();   
-
-            //Testa as validações
-            if ($this->form_validation->run() === false) {
-                $data['msg'] = array('tipo' => 'e', 'texto' => validation_errors());
-            } else {
-                
-                //pega todos os dados necessarios da view
-                $sistema = $this->getDados();
-                
-                //grava o sistema
-                if(!$this->Crud->create($this->tabela, $sistema, false)) {
-                  $data['msg'] = array('tipo' => 'e', 'texto' => 'Erro ao incluir o sistema');
-                }else {
-                  $data['msg'] = array('tipo' => 's', 'texto' => Mensagem::MN002());
-                }
-            }
             
+            if($this->validarObrigatorio())
+            {
+    
+                //Seta as validações
+                $this->setRegrasValidacao();   
+
+                //Testa as validações
+                if ($this->form_validation->run() === false) {
+                    $data['msg'] = array('tipo' => 'e', 'texto' => validation_errors());
+                } else {
+
+                    //pega todos os dados necessarios da view
+                    $sistema = $this->getDados();
+
+                    //grava o sistema
+                    if(!$this->Crud->create($this->tabela, $sistema, false)) {
+                      $data['msg'] = array('tipo' => 'e', 'texto' => 'Erro ao incluir o sistema');
+                    }else {
+                      $data['msg'] = array('tipo' => 's', 'texto' => Mensagem::MN002());
+                    }
+                }
+                
+            } else {
+                $data['msg'] = array('tipo' => 'e', 'texto' => Mensagem::MN003());
+            }
+
         } catch (Exception $exc) {
             $data['msg'] = array('tipo' => 'e', 'texto' => $exc->getMessage());
         }
@@ -165,26 +187,31 @@ class Sistema extends CI_Controller {
     {
         try {
             $data = array();
+            
+            if($this->validarObrigatorio())
+            {
+                 //Seta as validações
+                 $this->setRegrasValidacao();   
 
-             //Seta as validações
-             $this->setRegrasValidacao();   
+                //Testa as validações
+                if ($this->form_validation->run() === false) {
+                    $data['msg'] = array('tipo' => 'e', 'texto' => validation_errors());
+                } else {
 
-            //Testa as validações
-            if ($this->form_validation->run() === false) {
-                $data['msg'] = array('tipo' => 'e', 'texto' => validation_errors());
-            } else {
-                
-                //pega todos os dados necessarios da view
-                $sistema = $this->getDados();
-                
-                //grava o endereco
-                if(!$this->Crud->update($this->tabela, $sistema)) {
-                  $data['msg'] = array('tipo' => 'e', 'texto' => 'Erro ao alterar sistema');
-                }else {
-                  $data['msg'] = array('tipo' => 's', 'texto' => Mensagem::MN002());
+                    //pega todos os dados necessarios da view
+                    $sistema = $this->getDados();
+
+                    //grava o endereco
+                    if(!$this->Crud->update($this->tabela, $sistema)) {
+                      $data['msg'] = array('tipo' => 'e', 'texto' => 'Erro ao alterar sistema');
+                    }else {
+                      $data['msg'] = array('tipo' => 's', 'texto' => Mensagem::MN002());
+                    }                
                 }
-
-            }
+                
+            } else {
+                $data['msg'] = array('tipo' => 'e', 'texto' => Mensagem::MN003());
+            }                
             
         } catch (Exception $exc) {
             $data['msg'] = array('tipo' => 'e', 'texto' => $exc->getMessage());
